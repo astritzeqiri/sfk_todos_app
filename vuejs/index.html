@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todos app - VueJS</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+	<div class="container">
+	    <div class="row">
+	        <div class="col-md-6">
+	            <div class="todolist not-done">
+	             	<h1>Todos</h1>
+	            	<input type="text" v-model="newTodo" class="form-control add-todo" placeholder="Add todo" @keypress.enter="addTodo">
+	                <button @click.prevent="markAllAsDone" class="btn btn-success m-t-lg">Mark all as done</button>
+
+	                <hr>
+	                <ul class="list-unstyled">
+	                    <li class="ui-state-default" v-for="todo in left_todos">
+	                        <div class="checkbox">
+	                            <label><input type="checkbox" @click.prevent="todo.done = true"/>{{ todo.text }}</label>
+	                        </div>
+	                    </li>
+	                </ul>
+	                <div class="todo-footer">
+	                    <strong><span class="count-todos">{{ left_todos.length }}</span></strong> Items Left
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-md-6">
+	            <div class="todolist">
+	             	<h1>Already Done</h1>
+	                <ul class="list-unstyled">
+	                	<li v-for="todo in done_todos">
+	                		{{ todo.text }}
+	                		<button class="btn btn-default btn-xs pull-right remove-item" @click.prevent="deleteTodo(todo)"><span class="glyphicon glyphicon-remove"></span></button>
+	                	</li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript">
+	new Vue({
+	  	el: '#app',
+
+	  	data: {
+	  		newTodo: '',
+	  		todos: [
+	  			{
+	  				text: 'Take out the trash',
+	  				done: false
+	  			},
+	  			{
+	  				text: 'Buy bread',
+	  				done: false
+	  			},
+	  			{
+	  				text: 'Buy milk',
+	  				done: false
+	  			},
+	  		]
+	  	},
+
+	  	computed: {
+	  		left_todos () {
+	  			return this.todos.filter(todo => ! todo.done)
+	  		},
+
+	  		done_todos () {
+	  			return this.todos.filter(todo => todo.done)
+	  		}
+	  	},
+
+	  	methods: {
+	  		markAllAsDone () {
+	  			this.todos.forEach(todo => {
+	  				todo.done = true;
+	  			})
+	  		},
+
+	  		deleteTodo (todo) {
+				// this.$delete(this.todos, this.todos.indexOf(todo))
+
+	  			this.todos.splice(this.todos.indexOf(todo), 1);
+	  		},
+
+	  		addTodo () {
+	  			if (this.newTodo.trim() == '') {
+	  				alert("Add todo text");
+	  				this.newTodo = '';
+	  				return;
+	  			}
+
+	  			this.todos.push({
+	  				text: this.newTodo,
+	  				done: false
+	  			});
+  				this.newTodo = '';
+	  		}
+	  	}
+	})
+</script>
+</body>
+</html>

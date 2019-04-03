@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Todos app</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+             	<h1>Todos</h1>
+            	<input type="text" id="add-todo" class="form-control add-todo" placeholder="Add todo">
+                <button id="checkAll" class="btn btn-success m-t-lg">Mark all as done</button>
+
+                <hr>
+                <ul id="todoslist" class="list-unstyled">
+                    <li class="ui-state-default">
+                        <div class="checkbox">
+                            <label><input type="checkbox" />Take out the trash</label>
+                        </div>
+                    </li>
+                    <li class="ui-state-default">
+                        <div class="checkbox">
+                            <label><input type="checkbox" />Buy bread</label>
+                        </div>
+                    </li>
+                    <li class="ui-state-default">
+                        <div class="checkbox">
+                            <label><input type="checkbox" />Buy milk</label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="todo-footer">
+                    <strong><span class="count-todos"></span></strong> Items Left
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+             	<h1>Already Done</h1>
+                <ul id="done-items" class="list-unstyled"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
